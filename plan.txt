@@ -6,4 +6,4 @@ We can also show that by changeing the error function, you can show how the assu
 reference wiles and TMI2013. Then talk about gamifing it, and get some serious games references in.
 
 After playing with surgeryfred I think one of the reasons that FRE gets used so much is because it is correlated with FLE, which in turn is correlated with TRE. Ideally we would know FLE better but this is difficult in practice. If you don't know the FLE, then FRE is correlated with TRE so we could could it, 
-"Can FRE predict TRE?. Using SciKit-SurgeryFRED to teach and test fiducial based registration" 
+"Can FRE predict TRE?. Using SciKit-SurgeryFRED to teach and test fiducial based registration", that would be an interesting play on JMFitz's 2009 SPIE paper?, see citation included.

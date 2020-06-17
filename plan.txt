@@ -1,0 +1,9 @@
+Could we put this in as an abstract to SPIE? They quite like TRE/FRE. We need 2-4 pages by the 5th of August
+https://spie.org/conferences-and-exhibitions/medical-imaging/for-authors-and-presenters/abstract-submission-guidelines
+
+We can also show that by changeing the error function, you can show how the assumptions fail when you have systematic error, and anistropic error. 
+
+reference wiles and TMI2013. Then talk about gamifing it, and get some serious games references in.
+
+After playing with surgeryfred I think one of the reasons that FRE gets used so much is because it is correlated with FLE, which in turn is correlated with TRE. Ideally we would know FLE better but this is difficult in practice. If you don't know the FLE, then FRE is correlated with TRE so we could could it, 
+"Can FRE predict TRE?. Using SciKit-SurgeryFRED to teach and test fiducial based registration" 

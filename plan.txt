@@ -7,3 +7,5 @@ reference wiles and TMI2013. Then talk about gamifing it, and get some serious g
 
 After playing with surgeryfred I think one of the reasons that FRE gets used so much is because it is correlated with FLE, which in turn is correlated with TRE. Ideally we would know FLE better but this is difficult in practice. If you don't know the FLE, then FRE is correlated with TRE so we could could it, 
 "Can FRE predict TRE?. Using SciKit-SurgeryFRED to teach and test fiducial based registration", that would be an interesting play on JMFitz's 2009 SPIE paper?, see citation included.
+
+We could also extent it to the use of residual errors as a measure of calibration or registration accuracy in the literature, which remains wide spread. This presumably is because researchers do not have the time to determine the underlying FLE, so some sort of residual error is included as a proxy.

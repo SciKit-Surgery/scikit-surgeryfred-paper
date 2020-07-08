@@ -3,7 +3,7 @@ default : surgeryfred-paper.pdf
 EXTERNALS = acronyms.tex \
 	    spie2008/spiebib.bst \
 	    surgeryfred-paper.bib \
-	    spie2008/spie.cls
+	    spie.cls
 
 INPUTS = surgeryfred-paper.tex \
 	 abstract.tex \

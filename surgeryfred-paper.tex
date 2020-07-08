@@ -1,0 +1,97 @@
+
+
+% This is mymiccaipaper.tex the demonstration file of
+% MICCAI 2006 for Latex2e
+% adapted from LLNCS.DEM from
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.2 for LaTeX2e
+%
+%\documentclass[runningheads]{llncs}
+\documentclass[a4paper, lmargin=1.925cm, rmargin=1.925cm,tmargin=2.54cm,bmargin=4.94cm]{spie}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+%st added this to help with anonymisation
+%otherwise it took my name from one of the eps file
+%This still got overwritten by the last eps file,
+%had to manually pull the author out of that.
+\pdfinfo{
+%letterpaper,
+%colorlinks,
+%urlcolor=black,
+pdfpagemode=none,
+pdftitle={blank},
+pdfauthor={anonymous},
+pdfcreator={},
+pdfsubject={},
+pdfkeywords={}
+}
+		  
+%
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{array}
+\usepackage{pifont}
+\graphicspath{{pics/}{figs/}}
+% list here all the paths to your figure folders
+\usepackage{glossaries} %st - put this in to deal with acronyms tidily
+%\usepackage[acronym=true,description]{glossaries} %st - put this in to deal with acronyms tidily
+\include{acronyms} %removed relative path and replaced with symbolic link in this directory, see makefile.
+
+\begin{document}
+%
+%\frontmatter          % for the preliminaries
+%
+%\authorrunning{S. Thompson et al.}   % abbreviated author list (for running head)
+%\pagestyle{headings}  % switches on printing of running heads
+%\pagestyle{empty}  % switches off printing of running heads
+%
+%\mainmatter              % start of your contributions
+%
+\title{Are fiducial registration error and target registration error correlated? Using SciKit-SurgeryFRED to teach the statistics of fiducial based registration.}
+%\titlerunning{Laproscope Calibration}  % abbreviated title (for running head)
+%
+%\author{Stephen Thompson \and Matt Clarkson \and Johanned Totz \and Yi Song \and Danail Stoyanov \and David Hawkes }
+%
+\author{Stephen~Thompson\supit{1}, Tom~Dowrick, Mian~Ahmad\supit{1}, Matthew~J.~Clarkson\supit{1}
+\skiplinehalf
+\supit{1}Wellcome/EPSRC Centre for Interventional and Surgical Science, University College London, United Kingdom \\
+}
+
+%
+%
+%%%% modified list of authors for the TOC (add the affiliations)
+%\tocauthor{Stephen Thompson (University College London),
+%Matt Clarkson (University College London),
+%Johannes Totz (University College London),
+%Yi Song (University College London),
+%David Hawkes (University College London)
+%}
+%
+%\institute{Centre for Medical Image Computing, University College London.
+%}
+
+% The following lines are used to remove authors and affiliations from
+% the front page and running titles
+%\author{-, -, -}
+%\authorrunning{-}
+%\tocauthor{-}
+%\institute{-}
+
+\maketitle              % typeset the title of the contribution
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\input{introduction}
+\input{methods}
+\input{results}
+\input{discussion}
+\input{acknowledgements}
+\bibliographystyle{spie2008/spiebib}
+
+\bibliography{surgeryfred-paper.bib}
+
+\end{document}

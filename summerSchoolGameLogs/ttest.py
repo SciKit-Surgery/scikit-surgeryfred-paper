@@ -2,6 +2,7 @@
 import csv
 import scipy.stats
 import numpy as np
+import matplotlib
 
 categories = []
 scores = []
@@ -45,14 +46,36 @@ def mean_and_fail_rate(scores):
     fail_rate = float(fails) / float (len(scores))
     return mean, fail_rate
 
+names=["Overall", "Actual TRE", "Actual FRE", "Expected FLE", "Expected FRE", "Expected TRE"]
+means=[]
+fail_rates=[]
 
-print("All (mean, fail rate):", mean_and_fail_rate(scores))
-print("Actual TRE mean:", mean_and_fail_rate(actual_tre))
-print("Actual FRE mean:", mean_and_fail_rate(actual_fre))
-print("Expected FLE mean:", mean_and_fail_rate(expected_fle))
-print("Expected FRE mean:", mean_and_fail_rate(expected_fre))
-print("Expected TRE mean:", mean_and_fail_rate(expected_tre))
+mean, fail_rate = mean_and_fail_rate(scores)
+means.append(mean)
+fail_rates.append(fail_rate)
 
+mean, fail_rate = mean_and_fail_rate(actual_tre)
+means.append(mean)
+fail_rates.append(fail_rate)
+
+mean, fail_rate = mean_and_fail_rate(actual_fre)
+means.append(mean)
+fail_rates.append(fail_rate)
+
+mean, fail_rate = mean_and_fail_rate(expected_fle)
+means.append(mean)
+fail_rates.append(fail_rate)
+
+mean, fail_rate = mean_and_fail_rate(expected_fre)
+means.append(mean)
+fail_rates.append(fail_rate)
+
+mean, fail_rate = mean_and_fail_rate(expected_tre)
+means.append(mean)
+fail_rates.append(fail_rate)
+
+for index, name in enumerate(names):
+    print(name, " (mean, fail rate): ", means[index], fail_rates[index])
 
 t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64),
                                         np.array(scores, dtype=np.float64), 

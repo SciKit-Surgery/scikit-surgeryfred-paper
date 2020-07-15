@@ -38,8 +38,22 @@ for index, cat in enumerate(categories):
 
 assert len(actual_tre) == len(expected_tre) == len(expected_fre) == len(expected_fle) == len(actual_fre)
 
+def mean_and_fail_rate(scores):
+    array = np.array(scores, dtype=np.float64)
+    mean = np.mean(array)
+    fails = np.count_nonzero(array < 0)
+    fail_rate = float(fails) / float (len(scores))
+    return mean, fail_rate
 
-print ("read ", len(categories), " entries.")
+
+print("All (mean, fail rate):", mean_and_fail_rate(scores))
+print("Actual TRE mean:", mean_and_fail_rate(actual_tre))
+print("Actual FRE mean:", mean_and_fail_rate(actual_fre))
+print("Expected FLE mean:", mean_and_fail_rate(expected_fle))
+print("Expected FRE mean:", mean_and_fail_rate(expected_fre))
+print("Expected TRE mean:", mean_and_fail_rate(expected_tre))
+
+
 t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64),
                                         np.array(scores, dtype=np.float64), 
                                         equal_var = False, nan_policy='raise')

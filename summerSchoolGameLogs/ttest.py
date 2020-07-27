@@ -2,7 +2,7 @@
 import csv
 import scipy.stats
 import numpy as np
-import matplotlib
+import matplotlib.pyplot as plt
 
 categories = []
 scores = []
@@ -104,3 +104,16 @@ t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64),
                                         np.array(actual_fre, dtype=np.float64),
                                         equal_var = True, nan_policy='raise')
 print ("T Test actual TRE vs actual FRE", t_stat, p_value)
+
+fig, ax1 = plt.subplots()
+
+ax1.bar(names, means, width=0.5, label='Mean Scores')
+ax1.set_ylabel('Mean Score')
+ax1.set_xlabel('Statistic Shown')
+
+ax2 = ax1.twinx()
+ax2.set_ylabel('Failure Rate')
+ax2.plot(names, fail_rates, marker='o', linestyle='none', color='black', markersize=12, label='Under Treatment Rate')
+
+fig.legend()
+plt.show()

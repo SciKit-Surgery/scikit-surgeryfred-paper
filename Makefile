@@ -1,7 +1,7 @@
 default : surgeryfred-paper.pdf
 
 EXTERNALS = acronyms.tex \
-	    spie2008/spiebib.bst \
+	    spmpsci.bst \
 	    surgeryfred-paper.bib \
 	    spie.cls
 

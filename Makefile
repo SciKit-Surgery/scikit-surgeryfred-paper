@@ -6,7 +6,7 @@ EXTERNALS = acronyms.tex \
 	    spie.cls
 
 INPUTS = surgeryfred-paper.tex \
-	 abstract.tex \
+	 abstract_250.tex \
 	 introduction.tex \
 	 methods.tex \
 	 results.tex \

@@ -106,14 +106,18 @@ t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64),
 print ("T Test actual TRE vs actual FRE", t_stat, p_value)
 
 fig, ax1 = plt.subplots()
-
+fontsize=26
+ticksize=14
+plt.setp(ax1.get_xticklabels(), rotation='horizontal', fontsize=ticksize)
+plt.setp(ax1.get_yticklabels(), rotation='horizontal', fontsize=ticksize)
 ax1.bar(names, means, width=0.5, label='Mean Scores')
-ax1.set_ylabel('Mean Score')
-ax1.set_xlabel('Statistic Shown')
+ax1.set_ylabel('Mean Score', fontsize=fontsize )
+ax1.set_xlabel('Statistic Shown', fontsize=fontsize)
 
 ax2 = ax1.twinx()
-ax2.set_ylabel('Failure Rate')
+plt.setp(ax2.get_yticklabels(), rotation='horizontal', fontsize=ticksize)
+ax2.set_ylabel('Failure Rate', fontsize=fontsize)
 ax2.plot(names, fail_rates, marker='o', linestyle='none', color='black', markersize=12, label='Under Treatment Rate')
 
-fig.legend()
+fig.legend( fontsize=fontsize )
 plt.show()

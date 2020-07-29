@@ -13,7 +13,9 @@ INPUTS = surgeryfred-paper.tex \
 	 discussion.tex \
 	 acknowledgements.tex \
 
-FIGURES = scikit-surgeryfred_gui.eps
+FIGURES = scikit-surgeryfred_gui.eps \
+	  usability.eps \
+	  SciKit-SurgeryF.R.E.D._Correlation_Plots.eps
 
 surgeryfred-paper.dvi : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FIGURES)
 	latex -halt-on-error surgeryfred-paper.tex 

@@ -34,6 +34,21 @@ pdfkeywords={}
 \usepackage{array}
 \usepackage{pifont}
 \usepackage{url}
+
+%this is trying to make a nice code listing box
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+
+\newtcblisting[auto counter]{pythonlisting}[2][]{sharp corners,
+    fonttitle=\bfseries, colframe=gray, listing only,
+    listing options={basicstyle=\ttfamily,language=python},
+    title=Listing \thetcbcounter: #2, #1}
+
+\newtcblisting[auto counter]{javalisting}[2][]{sharp corners,
+    fonttitle=\bfseries, colframe=gray, listing only,
+    listing options={basicstyle=\ttfamily,language=java},
+    title=Listing \thetcbcounter: #2, #1}
+
 \graphicspath{{pics/}{figs/}}
 % list here all the paths to your figure folders
 \usepackage{glossaries} %st - put this in to deal with acronyms tidily
@@ -88,6 +103,7 @@ pdfkeywords={}
 
 \input{introduction}
 \input{methods}
+\input{implementation}
 \input{results}
 \input{discussion}
 \input{acknowledgements}

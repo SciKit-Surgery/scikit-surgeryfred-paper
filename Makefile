@@ -20,7 +20,7 @@ FIGURES = scikit-surgeryfred_gui.eps \
 	  images/default.eps \
 	  dependency_graph.eps \
 	  images/anisitropic_error.eps \
-	  images/_systematic_error.eps
+	  images/systematic_error.eps
 
 surgeryfred-paper.dvi : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FIGURES)
 	latex -halt-on-error surgeryfred-paper.tex 

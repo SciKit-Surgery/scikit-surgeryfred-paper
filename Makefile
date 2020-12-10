@@ -17,9 +17,10 @@ INPUTS = surgeryfred-paper.tex \
 
 FIGURES = scikit-surgeryfred_gui.eps \
 	  usability.eps \
-	  SciKit-SurgeryF.R.E.D._Correlation_Plots.eps \
+	  images/default.eps \
 	  dependency_graph.eps \
-	  images/anisitropic_error.eps
+	  images/anisitropic_error.eps \
+	  images/_systematic_error.eps
 
 surgeryfred-paper.dvi : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FIGURES)
 	latex -halt-on-error surgeryfred-paper.tex 

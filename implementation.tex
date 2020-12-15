@@ -29,20 +29,20 @@ on GitHub\footnote{\href{https://github.com/UCL/scikit-surgeryfred}{https://gith
 GitHub Actions \footnote{\href{https://github.com/UCL/scikit-surgeryfred/actions}{https://github.com/UCL/scikit-surgeryfred/actions}}.
 
 \subsection{Availability and Usage}
-For those you want to quickly try it out, we currently maintain an instance of \fred hosted at \href{https://scikit-surgeryfred01.ew.r.appspot.com/}{https://scikit-surgeryfred01.ew.r.appspot.com/}. This should be accessible from most modern web browsers.
+For those who want to quickly try \fred out, we currently maintain a running instance hosted at \href{https://scikit-surgeryfred01.ew.r.appspot.com/}{https://scikit-surgeryfred01.ew.r.appspot.com/}. This should be accessible from most modern web browsers.
 
 If you want to run a locally hosted instance, or modify the code for your needs, you can download the source code. \fred is entirely open source software, the latest version of which can be obtained from Github. Alternatively, archived releases can be retrieved via Zenodo\cite{stephen_thompson_2020_4314971}.
 
-\begin{pythonlisting}{Get \fred by cloning the repository}
+\begin{lstlisting}[language=bash]
 	git clone https://github.com/UCL/scikit-surgeryfred
-\end{pythonlisting}
+\end{lstlisting}
 
 Once installed the dependencies can be installed on a local virtual machine using tox. The application can then be run with as follows. This should output a web address that you can open in a browser to run the software. 
 
-\begin{pythonlisting}{Install dependencies and run \fred}
+\begin{lstlisting}[language=bash]
 	cd scikit-surgeryfred
 	tox
 	source .tox/py37/bin/activate
 	python main.py
-\end{pythonlisting}
+\end{lstlisting}
 

@@ -18,3 +18,32 @@ so it must be stated that the results are not yet statistically significant.
 \end{figure}
 
 
+\subsection{Extension to Anisotropic Errors}
+We simulated an anisotropic independent \gls{FLE}, with \gls{FLE} in the x 
+direction being 3 times that in the y and z. Errors were scaled so that the 
+expected absolute value of the \gls{FLE} was the same as for the isotropic case. 
+\fred was then used to perform at least 200 simulated registrations, the results of
+which are shown in Fig. \ref{fig:anis_error}. 
+
+\begin{figure}
+	\begin{center}
+			\includegraphics[width=0.9\linewidth]{images/anisitropic_error.eps}
+		\caption{\label{fig:anis_error}Results of over 200 registrations using an anisotropic model of {FLE}}
+	\end{center}
+\end{figure}
+
+It was apparent when preforming the registrations that the majority of target 
+registration error was in the x direction. However this is not apparent in the 
+statistics of Figure \ref{fig:anis_error}.
+\subsection{Addition of Systematic Errors}
+In this case the error is an isotropic uniform random variable, in the range
+-0.5 to 0.5. This error will be applied to all fiducial markers for a 
+given registration. The results of this modification are shown in Fig. \ref{fig:sys_error}.
+\begin{figure}
+	\begin{center}
+			\includegraphics[width=0.9\linewidth]{images/systematic_error.eps}
+			\caption{\label{fig:sys_error}Results of over 200 registrations with systematic error.}
+	\end{center}
+\end{figure}
+
+

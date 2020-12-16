@@ -9,8 +9,6 @@ INPUTS = surgeryfred-paper.tex \
 	 abstract_250.tex \
 	 introduction.tex \
 	 methods.tex \
-	 implementation.tex \
-	 other_errors.tex \
 	 results.tex \
 	 discussion.tex \
 	 acknowledgements.tex \

@@ -1,8 +1,11 @@
 \section{Results}
 \subsection{\fred as a Teaching Aid}
 
-\fred (v0.0.3)\cite{stephen_thompson_2020_3946090} was used at our Medical Summer School in 2020 with a cohort of 5 students. Feedback suggested that it had improved their understanding
-of fiducial based registration. 
+\fred (v0.0.3)\cite{stephen_thompson_2020_3946090} was used at our Medical Summer School in 2020 with a cohort of 5 students. Informal feedback indicated that it had improved their
+understanding
+of fiducial based registration. \fred also forms part of the \gls{BARD} which 
+was a finalist at the MICCAI 2020 educational challenge 
+\footnote{\href{https://miccai-sb.github.io/materials.html}{https://miccai-sb.github.io/materials.html}}. 
 
 \subsection{Extension to Anisotropic Errors}
 We simulated an anisotropic independent \gls{FLE}, with \gls{FLE} in the x 
@@ -44,10 +47,12 @@ Section \ref{sec:game_method}, to investigate the likely clinical impact of thes
 systematic errors.
 
 \subsection{\fred for Research in System Usability}
-The results of the game based usability study are shown in Figure \ref{fig:usability}. As expected scores are 
+The results of the game based usability study described in Section \ref{sec:game_method}
+are shown in 
+Figure \ref{fig:usability}. As expected scores are 
 highest when the actual \gls{TRE} is known. Interestingly it appears that when told only the expected value of the \gls{FLE} the students
-tended to under treat the target more, resulting in lower overall scores. This study currently only has 100 data points (20 for each category)
-so it must be stated that the results are not yet statistically significant. 
+tended to under treat the target more, resulting in lower overall scores. 
+
 
 \begin{figure}
         \begin{center}
@@ -56,5 +61,14 @@ so it must be stated that the results are not yet statistically significant.
 	\end{center}
 \end{figure}
 
+The statistical significance of the results was tested using a two sided T-test implemented
+in {SciPy}'s\cite{2020SciPy-NMeth} {scipy.stats.ttest{\textunderscore}ind} function.
+Using a p-value of 0.05 none of the results were statistically significant. 
+Currently there are only 100 data points (20 for each category), so this is not 
+surprising. If we assume that the additional data follows the same pattern we 
+would need to run the game on a further 15 subjects to show statistical significance 
+on the difference in scores when using actual \gls{TRE}. In the case of the 
+\gls{FLE} we would need a further 30 participants. Given the ease with 
+which \fred can be deployed and used we hope to achieve this in the near future.
 
 

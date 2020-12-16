@@ -52,7 +52,10 @@ options. Again, using cloc, there are 561 lines of HTML5 and JavaScript. These n
 
 Figure \ref{fig:dependencies} shows the direct dependencies of \fred. The key functional dependency is
 \core\cite{matt_clarkson_2020_3965731}. \core implements matched point based registration \cite{Arun1987} together 
-with the calculation of expected \gls{FLE} and \gls{TRE} (equations 10 and 31 from Fitzpatrick et al.\cite{Fitzpatrick1998}). Flask\footnote{\href{https://palletsprojects.com/p/flask/}{https://palletsprojects.com/p/flask/}  [v1.1.2]} provides the web application framework 
+with the calculation of expected \gls{FLE} and \gls{TRE}
+(equations 10 and 31 from Fitzpatrick et al.\cite{Fitzpatrick1998}). 
+{NumPy} \cite{2020NumPy-Array} is used for array handling.
+Flask\footnote{\href{https://palletsprojects.com/p/flask/}{https://palletsprojects.com/p/flask/}  [v1.1.2]} provides the web application framework 
 to enable the browser based user interface to communicate with the Python based back end. The user
 interface communicates with the back end with a series of {POST} requests. All state information is stored in the 
 browser front end, allowing the back end to remain stateless, simplifying deployment. 

@@ -19,6 +19,8 @@ with open("all_logs.log", mode='r') as csv_file:
 
         categories.append(row[2])
         scores.append(row[3])
+
+scores
 actual_tre = []
 expected_tre = []
 expected_fre = []
@@ -77,31 +79,33 @@ fail_rates.append(fail_rate)
 for index, name in enumerate(names):
     print(name, " (mean, fail rate): ", means[index], fail_rates[index])
 
-t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64),
-                                        np.array(scores, dtype=np.float64), 
+reps=6 # hack to test stat power
+
+t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64).repeat(reps),
+                                        np.array(scores, dtype=np.float64).repeat(reps), 
                                         equal_var = False, nan_policy='raise')
 print ("T Test actual TRE vs all", t_stat, p_value)
-t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_fre, dtype=np.float64),
-                                        np.array(scores, dtype=np.float64), 
+t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_fre, dtype=np.float64).repeat(reps),
+                                        np.array(scores, dtype=np.float64).repeat(reps), 
                                         equal_var = False, nan_policy='raise')
 print ("T Test actual FRE vs all", t_stat, p_value)
-t_stat, p_value = scipy.stats.ttest_ind(np.array(expected_fle, dtype=np.float64),
-                                        np.array(scores, dtype=np.float64), 
+t_stat, p_value = scipy.stats.ttest_ind(np.array(expected_fle, dtype=np.float64).repeat(reps),
+                                        np.array(scores, dtype=np.float64).repeat(reps), 
                                         equal_var = False, nan_policy='raise')
 print ("T Test expected FLE vs all", t_stat, p_value)
 
-t_stat, p_value = scipy.stats.ttest_ind(np.array(expected_fre, dtype=np.float64),
-                                        np.array(scores, dtype=np.float64), 
+t_stat, p_value = scipy.stats.ttest_ind(np.array(expected_fre, dtype=np.float64).repeat(reps),
+                                        np.array(scores, dtype=np.float64).repeat(reps), 
                                         equal_var = False, nan_policy='raise')
 print ("T Test expected FRE vs all", t_stat, p_value)
 
-t_stat, p_value = scipy.stats.ttest_ind(np.array(expected_tre, dtype=np.float64),
-                                        np.array(scores, dtype=np.float64), 
+t_stat, p_value = scipy.stats.ttest_ind(np.array(expected_tre, dtype=np.float64).repeat(reps),
+                                        np.array(scores, dtype=np.float64).repeat(reps), 
                                         equal_var = False, nan_policy='raise')
 print ("T Test expected TRE vs all", t_stat, p_value)
 
-t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64), 
-                                        np.array(actual_fre, dtype=np.float64),
+t_stat, p_value = scipy.stats.ttest_ind(np.array(actual_tre, dtype=np.float64).repeat(reps), 
+                                        np.array(actual_fre, dtype=np.float64).repeat(reps),
                                         equal_var = True, nan_policy='raise')
 print ("T Test actual TRE vs actual FRE", t_stat, p_value)
 

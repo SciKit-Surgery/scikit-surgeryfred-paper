@@ -4,29 +4,87 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 </head>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2&display=swap" rel="stylesheet">
 <body>
-<div>
-	hello world
-	<canvas id="results" width = "450px" height ="300px">results plot</canvas>
+	<div>
+	<img id="logo" src = "logo.svg" 
+      width="458px" height="60px" type="image/svg"
+      style="z-index:1; position:absolute; left:50px; top:10px;"/>
+	<p style="font-family: 'Baloo Bhaina 2'; font-size:40px;
+	z-index:1; position:absolute; left:430px; top:-35px;">	FRED Game Results</p>
+	</div>
+<div style="z-index:1; position:absolute; left:0px; top:70px;">
+	<canvas id="results" width = "960px" height ="540px">results plot</canvas>
 	<script>
 		var ctx = document.getElementById('results').getContext('2d');
+Chart.defaults.global.defaultFontSize = 18;
+
 var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'line',
+    type: 'bar',
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Overall', 'Actual TRE', 'Actual FRE', 'Expected FLE', 'Expected FRE', 'Expected TRE'],
+	    //data take from summerSchoolGameLogs/ttest.py
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
-        }]
+            label: 'Mean Scores',
+	    yAxisID: 'A',
+            backgroundColor: 'rgb(51, 184, 204)', //light blue logo #33B8CC
+            borderColor: 'rgb(255, 99, 132)', 
+	    order: 2,
+            data: [517.4, 614.5, 502.8, 449.9, 499.6, 520.5]
+        },
+		{
+	    label: 'Mean Scores',
+	    yAxisID: 'B',
+            backgroundColor: 'rgb(49, 98, 158)', //dark blue logo #31629E
+            borderColor: 'rgb(0, 0, 0)',
+	    type: 'line',
+	    showLine: false,
+	    order: 1,
+	    pointRadius: 16,
+            data: [0.14, 0.15, 0.15, 0.2, 0.1, 0.1]
+		}
+	]
     },
+    options:{
+      scales: {
+        yAxes: [{
+		 id: 'A',
+		scaleLabel: {display: true,
+		        labelString: 'Mean Scores',
+			fontColor: 'rgb(51, 184, 204)',
+			fontSize: 24},
+		 type: 'linear',
+		 position: 'left',
+		ticks:{
+			beginAtZero: true
+		}
+	       },
+{
+		 id: 'B',
+		scaleLabel: {display: true,
+		        labelString: 'Under Treatment Rate',
+			fontColor: 'rgb(49,98, 158)',
+			fontSize: 24},
+		 type: 'linear',
+		 position: 'right',
+		ticks:{
+			beginAtZero: true
+		}
+	       }
 
-    // Configuration options go here
-    options: {}
+
+	]
+	   },
+	    legend: {
+                      display: false
+              },
+
+	}
+
 });
 	</script>
 </div>

@@ -28,6 +28,7 @@ The student should be able to see first hand that, as expected, \gls{FRE} is unc
 \end{figure}
 
 \subsection{Game Based Usability Study}
+\label{sec:game_method}
 Once the students have an understanding of what statistics can be used to estimate \gls{TRE}, we wanted to test 
 how knowledge of a particular statistic affects optimal treatment planning. We designed a serious game to 
 do this. After registration the students are able to set a treatment margin and ablate the target. The goal is 
@@ -90,6 +91,7 @@ Once installed the dependencies can be installed on a local virtual machine usin
 \end{lstlisting}
 
 \subsection{Extension to Anisotropic Errors}
+\label{sec:anis_method}
 In many cases {FLE} cannot be properly modelled as an isotropic, independent, random variable. In the case of optical tracking systems for example \cite{10.1117/12.536128} the errors normal to the camera plane are approximately 3 times those parallel to the camera plane. It is straightforward to implement such an anisotropic \gls{FLE} in SciKit-SurgeryFRED and test the effect on registration outcomes.
 The following code snippet is taken from  main.py. Line 63 defines the ratio of \gls{FLE} in three directions. By default they are all equal.
 
@@ -127,6 +129,7 @@ Changing line 63 to;
 sets the error in the x direction to 3 times that in the y and z directions.  
 
 \subsection{Addition of Systematic Errors}
+\label{sec:sys_method}
 A second significant source of error that is usually overlooked is the presence of systematic errors. For example when using a tracked pointer for fiducial localisation, 
 any pointer calibration error will be be added to all fiducial markers.
 Similarly some optical tracking systems can introduce a systematic error on 

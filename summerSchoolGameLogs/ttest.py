@@ -1,4 +1,4 @@
-#! /home/thompson/data/FiducialRegistrationEducationalDemonstration/.tox/py37/bin/python
+#! /home/thompson/data/scikit-surgeryfredmatplotlib/.tox/py37/bin/python
 import csv
 import scipy.stats
 import numpy as np

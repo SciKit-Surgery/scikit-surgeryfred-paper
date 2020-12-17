@@ -31,7 +31,7 @@ treatment.
 \subsection{Addition of Systematic Errors}
 We added a systematic \gls{FLE} as an isotropic uniform random variable, in the range
 -0.5 to 0.5, as described in Section \ref{sec:sys_method}. This error will be applied to all fiducial markers for a 
-given registration. We performed at least 200 simulated registrations using \fred, the results of which are shown in Fig. \ref{fig:sys_error}.
+given registration. We performed at least 200 simulated registrations using \fredns, the results of which are shown in Fig. \ref{fig:sys_error}.
 \begin{figure}
 	\begin{center}
 			\includegraphics[width=0.9\linewidth]{images/systematic_error.eps}
@@ -48,7 +48,7 @@ systematic errors.
 
 \subsection{Statistical Significance}
 As discussed in Section \ref{sec:methods} it is useful to perform tests of 
-statistical significance on \fred{s} registration results. 
+statistical significance on \fredns's registration results. 
 We used the function \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html}{stats.linregress} from {SciPy}\cite{2020SciPy-NMeth} to
 perform a Wald Test against the null hypothesis that the slope is zero. For the
 results shown in Figures \ref{fig:correlation}, \ref{fig:anis_error}, 

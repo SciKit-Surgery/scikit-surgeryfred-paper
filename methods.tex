@@ -1,6 +1,6 @@
 \section{Methods and Implementation}
 \label{sec:methods}
-SciKit-SurgeryFRED implements a simple user interface, Figure \ref{fig:surgery_fred}, to demonstrate registration of a pre-operative image to intra-operative space. At startup a target is placed at a random location within the pre-operative image, shown as a red circle. The standard deviation of the \gls{FLE} is randomly sampled from a uniform distribution 
+\fred implements a simple user interface, Figure \ref{fig:surgery_fred}, to demonstrate registration of a pre-operative image to intra-operative space. At startup a target is placed at a random location within the pre-operative image, shown as a red circle. The standard deviation of the \gls{FLE} is randomly sampled from a uniform distribution 
 between 0.5 and 5.0 pixels \footnote{All units are in pixels, as the concepts being explored do not depend on the units used. Figure 
 \ref{fig:surgery_fred} shows a brain MRI 458x512 pixels, by design SciKit-SurgeryFRED should work with other images 
 of arbitrary dimensions.}. By default the \gls{FLE} is modelled as an isotropic (in 3 dimensions), normally distributed, and independent random variable, though this can be easily changed. 
@@ -80,9 +80,9 @@ applications such as the SmartLiver system\cite{PMID:32780240}, whilst remaining
 \sksurgery is to keep individual libraries compact and orthogonal\cite{pragmaticprog}, simplifying dependency structures. Based on 
 analysis using cloc\footnote{\href{https://github.com/AlDanial/cloc}{https://github.com/AlDanial/cloc} [v1.82]} \fred consists of 802 lines of Python 
 code. The user interface is implemented in HTML5 and JavaScript, enabling multiple simple deployment 
-options. Again, using cloc, there are 561 lines of HTML5 and JavaScript. These numbers are similar to the other \sksurgery libraries which typically have around 2000 lines of code \cite{PMID:32436132}. In comparison, this paper consists of around 400 (CHECK ME) lines of Latex code.
+options. Again, using cloc, there are 561 lines of HTML5 and JavaScript. These numbers are similar to the other \sksurgery libraries which typically have around 2000 lines of code \cite{PMID:32436132}. In comparison, this paper consists of around 420 lines of Latex code.
 
-Figure \ref{fig:dependencies} shows the direct dependencies of \fred. The key functional dependency is
+Figure \ref{fig:dependencies} shows the direct dependencies of \fredns. The key functional dependency is
 \core\cite{matt_clarkson_2020_3965731}. \core implements matched point based registration \cite{Arun1987} together 
 with the calculation of expected \gls{FLE} and \gls{TRE}
 (equations 10 and 31 from Fitzpatrick et al.\cite{Fitzpatrick1998}). 
@@ -168,7 +168,7 @@ sets the error in the x direction to 3 times that in the y and z directions.
 A second significant source of error that is usually overlooked is the presence of systematic errors. For example when using a tracked pointer for fiducial localisation, 
 any pointer calibration error will be be added to all fiducial markers.
 Similarly some optical tracking systems can introduce a systematic error on 
-the tracking markers \cite{6294449}. {SciKit-SurgeryFRED} allows systematic error to 
+the tracking markers \cite{6294449}. \fred allows systematic error to 
 be added to each fiducial. The fiducial localisation error is set within 
 the JavaScript function init{\textunderscore}fles()
 (defined in static/main.js) each time a new target is set. 

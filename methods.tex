@@ -20,7 +20,19 @@ with no \gls{FLE}. \gls{FLE} is added to the marker location in the intra-operat
 between the red circle centre and the cross-hair. Once sufficient markers are placed ($>2$) the two sets of markers are registered as per \cite{Arun1987}. The expected values (variance) of the \gls{FRE} and \gls{TRE} are calculated 
 as per \cite{Fitzpatrick1998}. The student can use this interface together with an 
 online tutorial 
-to explore the relationships between the various statistics and error measures. During use the registration results are 
+to explore the relationships between the various statistics and error measures. The
+user can keep adding as many fiducial markers as they like for a given target. 
+Pressing the ``New Target'' button will place a new target at a random position 
+within the pre-operative image and randomly sample a new standard deviation for the
+\gls{FLE}.
+
+It is straightforward to explore how both \gls{TRE} and \gls{FRE} change in response to 
+both the number and geometry of the fiducial markers as is well established in the literature\cite{1295074, Fitzpatrick1998}. 
+It is
+also simple and instructive to create degenerate marker geometries, for example 
+a liner arrangement can produce low \gls{FRE} but extreme values of \gls{TRE}.
+
+During use the registration results are 
 stored in the browser. At any time the user can press the ``Plot Results'' button to quickly create a set of 
 plots showing the relationship between the actual \gls{TRE} and the various statistics. 
 An example plot is shown in Figure \ref{fig:correlation}. 

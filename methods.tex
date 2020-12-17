@@ -57,16 +57,22 @@ be dispelled by asking the student to download the results and perform a test of
 \label{sec:game_method}
 Once the students have an understanding of what statistics can be used to estimate \gls{TRE}, we wanted to test 
 how knowledge of a particular statistic affects optimal treatment planning. We designed a serious game to 
-do this. After registration the students are able to set a treatment margin and ablate the target. The goal is 
-to treat 100\% of the target with minimal ablation of surrounding tissue. A score of 1000 was awarded for complete ablation and 0 
-for anything less. From this 10 times the percentage volume of any surrounding tissues ablated is subtracted. So 
+do this. During this game the students are asked to perform a registration with a maximum of 
+6 fiducial markers, then set a treatment margin and ablate the target. The goal is 
+to treat 100\% of the target with minimal ablation of surrounding tissue.
+A score of 1000 was awarded for complete ablation and 0 
+for anything less. From this starting score 10 times the percentage volume of any
+surrounding tissues ablated is subtracted. So 
 treatments failing to treat 100\% of the target will receive a negative score. 
 Successful treatments will score between 0 and 1000, depending on the margin size. The optimum treatment 
 margin is the actual \gls{TRE} for a given registration.
 
 Each student participated in the game, performing 20 simulated ablations. For the first four ablations they were told the 
-actual \gls{TRE}. After that they performed 16 more ablations and were shown one of four randomly selected statistics on which to base their decision,
-the expected values of the TRE/FRE, the actual FRE, the expected value of the FLE. Scores were recorded.
+actual \gls{TRE} for training and to supply baseline data. After that they performed 16 more ablations and were shown one of four randomly selected statistics on which to base their decision,
+the expected values of the \gls{TRE}/\gls{FRE}, the actual \gls{FRE}, the expected value of the \gls{FLE}. These statistics
+were chosen as these are either known or can be estimated for a clinical procedure. Each statistic was shown 4 times, though
+the order was randomised for each participant. The scores for each ablation were recorded,  yielding 20 data points for 
+each participant.
 
 \subsection{Software Implementation}
 \fred is part of the \sksurgery\cite{PMID:32436132} family of libraries. In common with \sksurgery the majority of \fred is implemented in Python. Python was chosen as it combines sufficient features for clinical
@@ -99,12 +105,12 @@ using Chart.js\footnote{\href{https://www.chartjs.org/}{https://www.chartjs.org/
 In common with the rest of \sksurgery \fred utilises extensive testing and software process \cite{1398621} to 
 ensure the application is robust, reusable, and sustainable\cite{VENTERS2018174}. Change control and issue tracking is managed
 on GitHub\footnote{\href{https://github.com/UCL/scikit-surgeryfred}{https://github.com/UCL/scikit-surgeryfred}} and continuous integration is managed using
-GitHub Actions \footnote{\href{https://github.com/UCL/scikit-surgeryfred/actions}{https://github.com/UCL/scikit-surgeryfred/actions}}.
+GitHub Actions.
 
 \subsection{Availability and Usage}
 For those who want to quickly try \fred out, we currently maintain a running instance hosted at \href{https://scikit-surgeryfred01.ew.r.appspot.com/}{https://scikit-surgeryfred01.ew.r.appspot.com/}. This should be accessible from most modern web browsers.
 
-If you want to run a locally hosted instance, or modify the code for your needs, you can download the source code. \fred is entirely open source software, the latest version of which can be obtained from Github. Alternatively, archived releases can be retrieved via Zenodo\cite{stephen_thompson_2020_4314971}.
+If you want to run a locally hosted instance, or modify the code for your needs, you can download the source code. \fred is entirely open source software and is tested on Linux, MacOS, and Windows. The latest version can be obtained from Github. Alternatively, archived releases can be retrieved via Zenodo\cite{stephen_thompson_2020_4314971}.
 
 \begin{lstlisting}[language=bash]
 	git clone https://github.com/UCL/scikit-surgeryfred

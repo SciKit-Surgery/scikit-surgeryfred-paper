@@ -46,6 +46,28 @@ it might be more instructive to implement systematic errors in the game based me
 Section \ref{sec:game_method}, to investigate the likely clinical impact of these
 systematic errors.
 
+\subsection{Statistical Significance}
+As discussed in Section \ref{sec:methods} it is useful to perform tests of 
+statistical significance on \fred{s} registration results. 
+We used the function \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html}{stats.linregress} from {SciPy}\cite{2020SciPy-NMeth} to
+perform a Wald Test against the null hypothesis that the slope is zero. For the
+results shown in Figures \ref{fig:correlation}, \ref{fig:anis_error}, 
+and \ref{fig:sys_error} there was no significant
+relationship between actual \gls{TRE} and either actual or expected \gls{FRE}. There was
+a significant relationship between actual \gls{TRE} and the expected \gls{TRE}. All
+of these results are as expected.
+
+Tests against the expected value of \gls{FLE} and the number of fiducial markers are
+more problematic, as they are not continuous variables, which should be apparent 
+when looking at the results charts. The reason for this is obvious for the number
+of fiducial markers. The expected value of \gls{FLE} is clustered into groups as this
+is only set once for a given target, however the registration for this target 
+will be repeated each time a new fiducial marker is added beyond the minimum of 3. Hence 
+if the user adds a total of 10 fiducial markers, this will create 8 registration 
+results all with different \gls{TRE} and \gls{FRE}, but with a single value of 
+expected \gls{FLE}.
+
+
 \subsection{\fred for Research in System Usability}
 The results of the game based usability study described in Section \ref{sec:game_method}
 are shown in 
@@ -62,7 +84,7 @@ tended to under treat the target more, resulting in lower overall scores.
 \end{figure}
 
 The statistical significance of the results was tested using a two sided T-test implemented
-in {SciPy}'s\cite{2020SciPy-NMeth} {scipy.stats.ttest{\textunderscore}ind} function.
+in {SciPy}'s\cite{2020SciPy-NMeth} \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html}{stats.ttest{\textunderscore}ind} function.
 Using a p-value of 0.05 none of the results were statistically significant. 
 Currently there are only 100 data points (20 for each category), so this is not 
 surprising. 

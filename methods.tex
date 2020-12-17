@@ -1,4 +1,5 @@
 \section{Methods and Implementation}
+\label{sec:methods}
 SciKit-SurgeryFRED implements a simple user interface, Figure \ref{fig:surgery_fred}, to demonstrate registration of a pre-operative image to intra-operative space. At startup a target is placed at a random location within the pre-operative image, shown as a red circle. The standard deviation of the \gls{FLE} is randomly sampled from a uniform distribution 
 between 0.5 and 5.0 pixels \footnote{All units are in pixels, as the concepts being explored do not depend on the units used. Figure 
 \ref{fig:surgery_fred} shows a brain MRI 458x512 pixels, by design SciKit-SurgeryFRED should work with other images 
@@ -38,9 +39,7 @@ useful for the students to download the registration results and perform some st
 ``Download Results'' button which allows the user to get the results as a file in comma separated variable format. 
 For example the results in Figure \ref{fig:correlation} may prompt some students to ask if there is in fact a correlation 
 between \gls{FRE} and \gls{FRE}, as there is apparent though slight increase in \gls{TRE} with \gls{FRE}. This can quickly 
-be dispelled by asking the student to download the results and perform 
-\hereIam - we use SciPy linregress, check what the p-value means
-
+be dispelled by asking the student to download the results and perform a test of significance on the data. 
 
 \subsection{Game Based Usability Study}
 \label{sec:game_method}

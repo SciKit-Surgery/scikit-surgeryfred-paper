@@ -8,23 +8,27 @@ correctly interpret \gls{FRE} and residual errors in general.
 about \gls{FRE} and \gls{TRE}. SciKit-SurgeryFRED supports on line learning and provides tools to enable 
 research into user interface design for image guidance systems. 
 
-Faced with the need to deliver teaching and research remotely during 2020's {COVID} travel restrictions, we 
+Faced with the need to deliver teaching and research remotely during 2020's {SARS-CoV-2}\cite{PMID:32123347}
+travel restrictions, we 
 developed a new on line tutorial\footnote{\url{https://mphy0026.readthedocs.io/en/latest/summerschool/registration_demo.html}}
-on fiducial based registration. To run the tutorial the student installs SciKit-SurgeryFRED, which is a 
-set of three python based applications. Rather than simply telling the students that \gls{FRE} is uncorrelated with \gls{TRE} 
+on fiducial based registration. The tutorial utilises \fred which is now implemented as a browser based web-app. 
+\fred can be accessed on-line\footnote{\href{https://scikit-surgeryfred01.ew.r.appspot.com/}{https://scikit-surgeryfred01.ew.r.appspot.com/}} or deployed locally.
+Rather than simply telling the students that \gls{FRE} is uncorrelated with \gls{TRE} 
 we decided it would be more effective to use divergent questioning strategies\cite{Tofade155} within the application, analysis, synthesis and 
 evaluation levels of Bloom's taxonomy \cite{blooms_tax}. Hence the question posed within the title of this paper. 
 
 We also took the opportunity to develop a serious game based on SciKit-SurgeryFRED. Serious games have significant potential 
 as a training tool for clinicians \cite{PMID:28133947, serious-needle} and have the potential to enable the collection of substantial amounts of 
-usability data. 
+usability data. The results of the this game indicate that the choice of error statistic shown can effect clinical decision making.  
 
-In this paper we introduce the SciKit-SurgeryFRED application and show how it can
-be used as an educational tool and to perform a usability study. SciKit-SurgeryFRED 
-currently implements \gls{FLE} as an isotropic, normally distributed independent variable. 
+In this paper we introduce the \fred application and show how it can
+be used as an educational tool and to perform a usability study. By default \fred
+implements \gls{FLE} as an isotropic, normally distributed independent variable. 
+In this paper we show how \fred can be modified to implement anisotropic and 
+systematic errors, and present the results of these modifications. 
 It is our plan to build on 
 the software to perform larger studies; to investigate more realistic models of \gls{FLE};
 to investigate other registration approaches; and other ways of communicating registration error. 
-SciKit-SurgeryFRED is open 
+\fred is entirely open 
 source software and we encourage researchers and educators to use and contribute to it. 
 

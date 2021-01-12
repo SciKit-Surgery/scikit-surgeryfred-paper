@@ -17,8 +17,8 @@ The variance of the \gls{FLE} is shown to the right of the intra-operative image
 
 Clicking either image adds a fiducial marker to both images. By default the marker is added to the pre-operative image 
 with no \gls{FLE}. \gls{FLE} is added to the marker location in the intra-operative image, visualised as the misalignment
-between the red circle centre and the cross-hair. Once sufficient markers are placed ($>2$) the two sets of markers are registered as per \cite{Arun1987}. The expected values (variance) of the \gls{FRE} and \gls{TRE} are calculated 
-as per \cite{Fitzpatrick1998}. The student can use this interface together with an 
+between the red circle centre and the cross-hair. Once sufficient markers are placed ($>2$) the two sets of markers are registered using least squares fitting as described by Arun et al.\cite{Arun1987}. The expected values (variance) of the \gls{FRE} and \gls{TRE} are calculated 
+using equations described by Fitzpatrick et al.\cite{Fitzpatrick1998}. The student can use this interface together with an 
 online tutorial 
 to explore the relationships between the various statistics and error measures. The
 user can keep adding as many fiducial markers as they like for a given target. 
@@ -62,10 +62,11 @@ do this. During this game the students are asked to perform a registration with 
 to treat 100\% of the target with minimal ablation of surrounding tissue.
 A score of 1000 was awarded for complete ablation and 0 
 for anything less. From this starting score 10 times the percentage volume of any
-surrounding tissues ablated is subtracted. So 
-treatments failing to treat 100\% of the target will receive a negative score. 
-Successful treatments will score between 0 and 1000, depending on the margin size. The optimum treatment 
-margin is the actual \gls{TRE} for a given registration.
+surrounding tissues ablated is subtracted. 
+Successful treatments (100\% ablation) should therefore score between 0 and 1000, with a larger margin giving a lower score.
+The optimum (minimum successful) treatment
+margin is the actual \gls{TRE} for a given registration. 
+Any treatment that fails to treat 100\% of the target will receive a negative score. 
 
 Each student participated in the game, performing 20 simulated ablations. For the first four ablations they were told the 
 actual \gls{TRE} for training and to supply baseline data. After that they performed 16 more ablations and were shown one of four randomly selected statistics on which to base their decision,

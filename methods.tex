@@ -175,7 +175,7 @@ the tracking markers \cite{6294449}. \fred allows systematic error to
 be added to each fiducial. The fiducial localisation error is set within 
 the JavaScript function init{\textunderscore}fles()
 (defined in static/main.js) each time a new target is set. 
-\begin{lstlisting}[language=java, firstnumber = 429]
+\begin{lstlisting}[language=java, firstnumber = 496]
 /**
  * Sets the global fiducial localisation error (FLE)
  */
@@ -199,6 +199,7 @@ function init_fles() {
                 preOpFLEEAV, intraOpFLEEAV,
                 preOpSysError, intraOpSysError };
 
+        expectedFLEText.innerHTML = Math.round(Math.sqrt(FLE.intraOpFLEEAV)*100)/100;
       });
     })
     .catch(err => {
@@ -206,13 +207,13 @@ function init_fles() {
     });
 }
 \end{lstlisting}
-By default there is no systematic error, (lines 445 and 446). We can 
-add a systematic interoperative error at line 446 as; 
+By default there is no systematic error, (lines 515 and 516). We can 
+add a systematic interoperative error at line 516 as; 
 
-\begin{lstlisting}[language=java, firstnumber = 446]
-        intraOpSysError = [1.0 * (Math.random()-0.5), 
-                           1.0 * (Math.random()-0.5), 
-                           1.0 * (Math.random()-0.5)];
+\begin{lstlisting}[language=java, firstnumber = 513]
+        let intraOpSysError = [1.0 * (Math.random() - 0.5), 
+                               1.0 * (Math.random() - 0.5), 
+                               1.0 * (Math.random() - 0.5)];
 \end{lstlisting}
 
 In this case the error is an isotropic uniform random variable, in the range

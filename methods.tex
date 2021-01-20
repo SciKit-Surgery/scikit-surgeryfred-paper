@@ -131,9 +131,9 @@ Once installed the dependencies can be installed on a local virtual machine usin
 \subsection{Extension to Anisotropic Errors}
 \label{sec:anis_method}
 In many cases {FLE} cannot be properly modelled as an isotropic, independent, random variable. In the case of optical tracking systems for example \cite{10.1117/12.536128} the errors normal to the camera plane are approximately 3 times those parallel to the camera plane. It is straightforward to implement such an anisotropic \gls{FLE} in SciKit-SurgeryFRED and test the effect on registration outcomes.
-The following code snippet is taken from  main.py. Line 63 defines the ratio of \gls{FLE} in three directions. By default they are all equal.
+The following code snippet is taken from  main.py. Line 66 defines the ratio of \gls{FLE} in three directions. By default they are all equal.
 
-\begin{lstlisting}[language=python, firstnumber = 54]
+\begin{lstlisting}[language=python, firstnumber = 57]
 @app.route('/getfle', methods=['POST'])
 def getfle():
     """
@@ -160,8 +160,8 @@ def getfle():
     return returnjson
 \end{lstlisting}
 
-Changing line 63 to;
-\begin{lstlisting}[language=python, firstnumber=63]
+Changing line 66 to;
+\begin{lstlisting}[language=python, firstnumber=66]
     fle_ratio = np.array([3.0, 1.0, 1.0], dtype=np.float64)
 \end{lstlisting}
 sets the error in the x direction to 3 times that in the y and z directions.  
@@ -207,8 +207,8 @@ function init_fles() {
     });
 }
 \end{lstlisting}
-By default there is no systematic error, (lines 515 and 516). We can 
-add a systematic interoperative error at line 516 as; 
+By default there is no systematic error, (lines 512 and 513). We can 
+add a systematic interoperative error at line 513 as; 
 
 \begin{lstlisting}[language=java, firstnumber = 513]
         let intraOpSysError = [1.0 * (Math.random() - 0.5), 

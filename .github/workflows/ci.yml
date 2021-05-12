@@ -10,6 +10,7 @@ jobs:
 
       - name: Install and Build 🔧 
         run: |
+          sudo apt-get install -y tex4ht
           htlatex surgeryfred-paper.tex "html,html5, charset=utf-8" " -cunihtf -utf8" -ddocs/
 
       - name: Deploy 🚀

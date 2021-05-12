@@ -1,9 +1,4 @@
-*.aux
-*.bbl
-*.blg
-*.dvi
-*.pdf
-*.log
-*.png
-dependency_graph.dot
-dependency_graph.eps
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore

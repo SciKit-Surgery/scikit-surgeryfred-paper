@@ -50,9 +50,6 @@ build/surgeryfred-paper.html : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FI
 %.pdf : %.dvi
 	dvipdf $<
 
-%.eps : %.png
-	convert $< $@
-
 %.png : %.eps 
 	gs -dSAFER -dEPSCrop -r600 -sDEVICE=pngalpha -o $@ $<
 

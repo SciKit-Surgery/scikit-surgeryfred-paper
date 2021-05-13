@@ -11,10 +11,10 @@ jobs:
       - name: Install and Build 🔧 
         run: |
           sudo apt-get install -y tex4ht texlive-bibtex-extra texlive-latex-extra
-          htlatex surgeryfred-paper.tex "html,html5, charset=utf-8" " -cunihtf -utf8" -ddocs/
+          htlatex surgeryfred-paper.tex "html,html5, charset=utf-8" " -cunihtf -utf8" -dbuild/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.3
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: docs # The folder the action should deploy.
+          folder: build # The folder the action should deploy.

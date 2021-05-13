@@ -11,7 +11,7 @@ jobs:
       - name: Install and Build 🔧 
         run: |
           sudo apt-get install -y tex4ht texlive-bibtex-extra texlive-latex-extra
-	  make build/surgeryfred-paper.html
+          make build/surgeryfred-paper.html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.3

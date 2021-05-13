@@ -15,16 +15,19 @@
 .cmbx-12{ font-weight: bold;}
 .cmbx-12{ font-weight: bold;}
 .cmbx-12{ font-weight: bold;}
-.cmbx-7{font-size:70%; font-weight: bold;}
-.cmbx-7{ font-weight: bold;}
-.cmbx-7{ font-weight: bold;}
-.cmbx-7{ font-weight: bold;}
+.cmtt-10{font-family: monospace,monospace;}
+.cmtt-10{font-family: monospace,monospace;}
 .cmr-8{font-size:80%;}
 .cmbx-5{font-size:50%; font-weight: bold;}
 .cmbx-5{ font-weight: bold;}
 .cmbx-5{ font-weight: bold;}
 .cmbx-5{ font-weight: bold;}
 .cmtt-8{font-size:80%;font-family: monospace,monospace;}
+.cmtt-8{font-family: monospace,monospace;}
+.cmbx-10{ font-weight: bold;}
+.cmbx-10{ font-weight: bold;}
+.cmbx-10{ font-weight: bold;}
+.cmbx-10{ font-weight: bold;}
 p{margin-top:0;margin-bottom:0}
 p.indent{text-indent:0;}
 p + p{margin-top:1em;}

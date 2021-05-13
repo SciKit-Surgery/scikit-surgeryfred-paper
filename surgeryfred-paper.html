@@ -1,0 +1,1686 @@
+<!DOCTYPE html> 
+<html lang="en-US" xml:lang="en-US" > 
+<head><title>Are ﬁducial registration error and target registration error correlated?
+SciKit-SurgeryFRED for teaching and research.</title> 
+<meta  charset="utf-8" /> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+<meta name="viewport" content="width=device-width,initial-scale=1" /> 
+<link rel="stylesheet" type="text/css" href="surgeryfred-paper.css" /> 
+<meta name="src" content="surgeryfred-paper.tex"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+<h2 class="titleHead">Are ﬁducial registration error and target registration error
+correlated? SciKit-SurgeryFRED for teaching and research.</h2>
+<div class="author" ><span 
+class="cmr-12">Stephen</span><span 
+class="cmr-12"> Thompson</span><span 
+class="cmti-9">1</span><span 
+class="cmr-12">, Tom</span><span 
+class="cmr-12"> Dowrick</span><span 
+class="cmti-9">1</span><span 
+class="cmr-12">, Mian</span><span 
+class="cmr-12"> Ahmad</span><span 
+class="cmti-9">1</span><span 
+class="cmr-12">, Jeremy</span><span 
+class="cmr-12"> Opie</span><span 
+class="cmti-9">1</span><span 
+class="cmr-12">, Matthew</span><span 
+class="cmr-12"> J.</span><span 
+class="cmr-12"> Clarkson</span><span 
+class="cmti-9">1</span> <br />
+<span 
+class="cmti-9">1</span>
+ <span 
+class="cmr-12">Wellcome/EPSRC Centre for Interventional and Surgical Science, University College London,</span>
+<span 
+class="cmr-12">United Kingdom</span><br />
+</div>
+<div class="date" ></div>
+   </div>
+<div class="center" 
+>
+<!--l. 125--><p class="noindent" >
+<!--l. 127--><p class="noindent" >Medical Imaging 2021: Image-Guided Procedures, Robotic Interventions, and Modeling,
+edited by Cristian A. Linte, Jeﬀrey H. Siewerdsen, Proc. of SPIE Vol. 11598, 115980U
+<span 
+class="tcrm-1000">© </span>2021 SPIE <span 
+class="tcrm-1000">· </span>doi: <a 
+href="https://doi.org/10.1117/12.2580159" >10.1117/12.2580159</a></div>
+   <div 
+class="abstract" 
+>
+   <h3 class="likesectionHead"><a 
+ id="x1-1000"></a>ABSTRACT</h3>
+<!--l. 1--><p class="noindent" >Understanding the relationship between ﬁducial registration error (FRE) and target registration error (TRE) is
+important for the correct use of interventional guidance systems. Whilst it is well established that TRE is
+statistically independent of FRE, system users still struggle against the intuitive assumption that a low FRE
+indicates a low TRE. We present the SciKit-Surgery Fiducial Registration Educational Demonstrator and
+describe its use. SciKit-SurgeryFRED was developed to enable remote teaching of key concepts in image
+registration. SciKit-SurgeryFRED also supports research into user interface design for image registration
+systems.
+<!--l. 3--><p class="indent" >   SciKit-SurgeryFRED can be used to enable remote tutorials covering the statistics relevant to image guided
+interventions. Students are able to place ﬁducial markers on pre and intra-operative images and observe the
+eﬀects of changes in marker geometry, marker count, and ﬁducial localisation error on TRE and FRE.
+SciKit-SurgeryFRED also calculates statistical measures for the expected values of TRE and FRE. Because many
+registrations can be performed quickly the students can then explore potential correlations between the diﬀerent
+statistics.
+<!--l. 5--><p class="indent" >   SciKit-SurgeryFRED also implements a registration based game, where participants are rewarded for complete
+treatment of a clinical target, whilst minimising the treatment margin. We used this game to perform a remote study on
+registration and simulated ablation, measuring how user performance changes depending on what error statistics are
+made available. The results support the assumption that knowing the exact value of target registration error
+leads to better treatment. Display of other statistics did not have a signiﬁcant impact on the treatment
+performance.
+</div>
+                                                                                             
+                                                                                             
+<!--l. 1--><p class="noindent" ><span 
+class="cmbx-12">1.</span>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-20001"></a>Introduction</h3>
+<!--l. 2--><p class="noindent" >The fact that ﬁducial registration error (FRE) is uncorrelated with target registration error (TRE) is well established.<span 
+class="cmbx-7">?</span>
+In spite of this, many students and users of clinical guidance systems struggle to correctly interpret FRE and residual
+errors in general. SciKit-SurgeryFRED (Fiducial Registration Educational Demonstrator)<span 
+class="cmbx-7">?</span> was developed using the
+SciKit-Surgery<span 
+class="cmbx-7">?</span> libraries to probe the causes of misconceptions about FRE and TRE. SciKit-SurgeryFRED
+supports online learning and provides tools to enable research into user interface design for image guidance
+systems.
+<!--l. 11--><p class="indent" >   Faced with the need to deliver teaching and research remotely during 2020’s SARS-CoV-2<span 
+class="cmbx-7">?</span> travel restrictions, we developed a
+new online tutorial<span class="footnote-mark"><a 
+href="surgeryfred-paper2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-2001f1"></a> 
+on ﬁducial based registration. The tutorial utilises SciKit-SurgeryFRED which is now
+implemented as a browser based web-app. SciKit-SurgeryFRED can be accessed
+on-line<span class="footnote-mark"><a 
+href="surgeryfred-paper3.html#fn2x0"><sup class="textsuperscript">2</sup></a></span><a 
+ id="x1-2002f2"></a> 
+or deployed locally. Rather than simply telling the students that FRE is uncorrelated with TRE we decided it would be
+more eﬀective to use divergent questioning strategies<span 
+class="cmbx-7">?</span> within the application, analysis, synthesis and evaluation levels of
+Bloom’s taxonomy:<span 
+class="cmbx-7">?</span> hence the question posed within the title of this paper.
+<!--l. 20--><p class="indent" >   We also took the opportunity to develop a serious game based on SciKit-SurgeryFRED. Serious games are games
+designed to be engaging to play, whilst setting out to achieve an objective beyond pure entertainment. In the case of
+SciKit-SurgeryFRED, the objective is to gather data on how clinical decision making might be inﬂuenced by the
+communication of registration errors. Serious games have signiﬁcant potential as a training tool for clinicians.<span 
+class="cmbx-7">?</span><span 
+class="cmr-7">,</span><span 
+class="cmbx-7">?</span> Serious
+games have also been shown to be useful in assessing the usability of human computer interfaces,<span 
+class="cmbx-7">?</span> which is of particular
+relevance to computer aided surgery. The results of the game indicate that the choice of error statistic shown can aﬀect
+clinical decision making.
+<!--l. 29--><p class="indent" >   In this paper we introduce the SciKit-SurgeryFRED application and show how it can be used as an educational tool
+and to perform studies to measure registration and ablation performance. By default SciKit-SurgeryFRED implements
+ﬁducial localisation error (FLE) as an isotropic, normally distributed, independent variable. In this paper we show how
+SciKit-SurgeryFRED can be modiﬁed to implement anisotropic and systematic errors, and present the results of these
+modiﬁcations. It is our plan to build on the software to perform larger studies; to investigate more realistic models of
+FLE; to investigate other registration approaches; and other ways of communicating registration error.
+SciKit-SurgeryFRED is entirely open source software and we encourage researchers and educators to use and contribute
+to it.
+<span 
+class="cmbx-12">2.</span>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-30002"></a>Methods and Implementation</h3>
+<!--l. 3--><p class="noindent" >SciKit-SurgeryFRED implements a minimal user interface, Figure <a 
+href="#x1-3002r1">1<!--tex4ht:ref: fig:surgery_fred --></a>, to demonstrate registration of a pre-operative
+image to intra-operative space. At startup a target is placed at a random location within the pre-operative image, shown
+as a red circle. The standard deviation of the FLE is randomly sampled from a uniform distribution between 0.5 and 5.0
+pixels <span class="footnote-mark"><a 
+href="surgeryfred-paper4.html#fn3x0"><sup class="textsuperscript">3</sup></a></span><a 
+ id="x1-3001f3"></a> .
+By default the FLE is modelled as an isotropic (in 3 dimensions), normally distributed, and independent random
+                                                                                             
+                                                                                             
+variable, though this can be easily changed. The variance of the FLE is shown to the right of the intra-operative image
+(as expected value), along with the number of ﬁducial markers.
+<!--l. 9--><p class="indent" >   <figure class="figure"> 
+
+                                                                                             
+                                                                                             
+<a 
+ id="x1-3002r1"></a>
+                                                                                             
+                                                                                             
+<div class="center" 
+>
+<!--l. 10--><p class="noindent" >
+<!--l. 11--><p class="noindent" ><img 
+src="scikit-surgeryfred_gui.png" alt="PIC"  
+width="487" height="207" >
+<a 
+ id="x1-3003"></a>
+<figcaption class="caption" ><span class="id">Figure 1:</span><span  
+class="content">SciKit-SurgeryFRED graphical user interface after 6 ﬁducial markers placed. The red circle in the
+pre-operative image (left) represents a clinical target, which is located in the intra-operative space (middle)
+by  ﬁducial  based  registration,  using  the  ﬁducial  markers  (also  red).  FLE  is  added  to  each  marker  in  the
+intra-operative image, this is more clearly visible on the zoomed in image at the right. The resulting registration
+results in a TRE, shown by the misalignment of the red circle and crosshair on the enlarged image at right. TRE
+and other statistics are shown in boxes to the right of the intra-operative image.</span></figcaption><!--tex4ht:label?: x1-3002r2 -->
+</div>
+                                                                                             
+                                                                                             
+<!--l. 16--><p class="indent" >   </figure>
+<!--l. 18--><p class="indent" >   Clicking either image adds a ﬁducial marker to both images. By default the marker is added to the pre-operative
+image with no FLE. FLE is added to the marker location in the intra-operative image, visualised as the misalignment
+between the red circle centre and the cross-hair. Once suﬃcient markers are placed (<span 
+class="cmmi-10">&#x003E; </span>2) the two sets of markers are
+registered using least squares ﬁtting as described by Arun et al.<span 
+class="cmbx-7">?</span> The expected values (variance) of the FRE and TRE
+are calculated using equations described by Fitzpatrick et al.<span 
+class="cmbx-7">?</span> The student can use this interface together with an online
+tutorial to explore the relationships between the various statistics and error measures. The user can keep adding as many
+ﬁducial markers as they like for a given target. Pressing the “New Target” button will place a new target at a
+random position within the pre-operative image and randomly sample a new standard deviation for the
+FLE.
+<!--l. 29--><p class="indent" >   It is straightforward to explore how both TRE and FRE change in response to both the number and geometry of
+the ﬁducial markers as is well established in the literature.<span 
+class="cmbx-7">?</span><span 
+class="cmr-7">,</span><span 
+class="cmbx-7">?</span> It is also simple and instructive to create
+degenerate marker geometries, for example a linear arrangement can produce low FRE but extreme values of
+TRE.
+<!--l. 35--><p class="indent" >   During use the registration results are stored in the browser. At any time the user can press the “Plot Results”
+button to quickly create a set of plots showing the relationship between the actual TRE and the various statistics. An
+example plot is shown in Figure <a 
+href="#x1-3004r2">2<!--tex4ht:ref: fig:correlation --></a>. The student is usually able to see ﬁrst hand that, as expected, FRE is uncorrelated
+with TRE.
+<!--l. 41--><p class="indent" >   <figure class="figure"> 
+
+                                                                                             
+                                                                                             
+<a 
+ id="x1-3004r2"></a>
+                                                                                             
+                                                                                             
+<div class="center" 
+>
+<!--l. 42--><p class="noindent" >
+<!--l. 43--><p class="noindent" ><img 
+src="images/default.png" alt="PIC"  
+width="439" height="255" >
+<a 
+ id="x1-3005"></a>
+<figcaption class="caption" ><span class="id">Figure 2:</span><span  
+class="content">Plots of TRE against various error measures, generated by 205 user registrations.</span></figcaption><!--tex4ht:label?: x1-3004r2 -->
+</div>
+                                                                                             
+                                                                                             
+<!--l. 47--><p class="indent" >   </figure>
+<!--l. 49--><p class="indent" >   SciKit-SurgeryFRED does not implement tests of statistical signiﬁcance to avoid excessive software dependencies, so
+it is often useful for the students to download the registration results and perform some statistical analysis. This is
+facilitated by the “Download Results” button which allows the user to get the results as a ﬁle in comma separated
+variable format. For example the results in Figure <a 
+href="#x1-3004r2">2<!--tex4ht:ref: fig:correlation --></a> may prompt some students to ask if there is in fact a
+correlation between FRE and TRE, as there is an apparent though slight increase in TRE with FRE. This can
+quickly be dispelled by asking the student to download the results and perform a test of signiﬁcance on the
+data.
+<span 
+class="cmbx-12">2.1</span>
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-40002.1"></a>Game Based Registration Study</h4>
+<!--l. 58--><p class="noindent" >Once the students have an understanding of what statistics can be used to estimate TRE, we wanted to
+test how knowledge of a particular statistic aﬀects optimal treatment planning. We designed a serious
+game to do this. During this game the students are asked to perform a registration with a maximum of 6
+ﬁducial markers, then set a treatment margin and ablate the target. The goal is to treat 100% of the target
+with minimal ablation of surrounding tissue. A score of 1000 was awarded for complete ablation and 0 for
+anything less. From this starting score 10 times the percentage volume of any surrounding tissues ablated
+is subtracted. Successful treatments (100% ablation) should therefore score between 0 and 1000, with a
+larger margin giving a lower score. The optimum (minimum successful) treatment margin is the actual
+TRE for a given registration. Any treatment that fails to treat 100% of the target will receive a negative
+score.
+<!--l. 71--><p class="indent" >   Each student participated in the game, performing 20 simulated ablations. For the ﬁrst four ablations they were told
+the actual TRE for training and to supply baseline data. After that they performed 16 more ablations and were
+shown one of four randomly selected statistics on which to base their decision, the expected values of the
+TRE/FRE, the actual FRE, the expected value of the FLE. These statistics were chosen as these are either
+known or can be estimated for a clinical procedure. Each statistic was shown 4 times, though the order was
+randomised for each participant. The scores for each ablation were recorded, yielding 20 data points for each
+participant.
+<!--l. 78--><p class="noindent" ><span 
+class="cmbx-12">2.2</span>
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-50002.2"></a>Software Implementation</h4>
+<!--l. 79--><p class="noindent" >SciKit-SurgeryFRED is part of the SciKit-Surgery<span 
+class="cmbx-7">?</span> family of libraries. In common with SciKit-Surgery the majority of
+SciKit-SurgeryFRED is implemented in Python. Python was chosen as it combines suﬃcient features for clinical
+applications such as the SmartLiver system,<span 
+class="cmbx-7">?</span> whilst remaining easy enough for students to learn and contribute to. In
+contrast, although platforms built using C<span 
+class="cmbx-5">++</span> provide power and ﬂexibility, the choice of language creates a barrier
+to learning the key concepts of image guided surgery.<span 
+class="cmbx-7">?</span> A key design goal of SciKit-Surgery is to keep
+individual libraries compact and orthogonal,<span 
+class="cmbx-7">?</span> simplifying dependency structures. Based on analysis using
+cloc<span class="footnote-mark"><a 
+href="surgeryfred-paper5.html#fn4x0"><sup class="textsuperscript">4</sup></a></span><a 
+ id="x1-5001f4"></a> 
+SciKit-SurgeryFRED consists of 1479 lines of Python code. The user interface is implemented in HTML5 and JavaScript,
+enabling multiple simple deployment options. Again, using cloc, there are 957 lines of HTML5 and JavaScript.
+These numbers are similar to the other SciKit-Surgery libraries which typically have around 2000 lines of
+code.<span 
+class="cmbx-7">?</span>
+                                                                                             
+                                                                                             
+<!--l. 89--><p class="indent" >   Figure <a 
+href="#x1-5005r3">3<!--tex4ht:ref: fig:dependencies --></a> shows the direct dependencies of SciKit-SurgeryFRED. The key functional dependency is
+SciKit-SurgeryCore.<span 
+class="cmbx-7">?</span> SciKit-SurgeryCore implements matched point based registration<span 
+class="cmbx-7">?</span> together with the calculation of
+expected FLE and TRE (equations 10 and 31 from Fitzpatrick et al.<span 
+class="cmbx-7">?</span>). NumPy<span 
+class="cmbx-7">?</span> is used for array handling.
+Flask<span class="footnote-mark"><a 
+href="surgeryfred-paper6.html#fn5x0"><sup class="textsuperscript">5</sup></a></span><a 
+ id="x1-5002f5"></a>  provides
+the web application framework to enable the browser based user interface to communicate with the Python based back end.
+The user interface communicates with the back end with a series of POST requests. All state information is stored in the
+browser front end, allowing the back end to remain stateless, simplifying deployment. Including the Google Cloud FireStore
+API<span class="footnote-mark"><a 
+href="surgeryfred-paper7.html#fn6x0"><sup class="textsuperscript">6</sup></a></span><a 
+ id="x1-5003f6"></a> 
+enables the optional storage of results in a remotely hosted database. Plotting functionality is implemented using
+Chart.js<span class="footnote-mark"><a 
+href="surgeryfred-paper8.html#fn7x0"><sup class="textsuperscript">7</sup></a></span><a 
+ id="x1-5004f7"></a> 
+<!--l. 102--><p class="indent" >   <figure class="figure"> 
+
+                                                                                             
+                                                                                             
+<a 
+ id="x1-5005r3"></a>
+                                                                                             
+                                                                                             
+<div class="center" 
+>
+<!--l. 103--><p class="noindent" >
+<!--l. 104--><p class="noindent" ><img 
+src="dependency_graph.png" alt="PIC"  
+width="341" height="341" >
+<a 
+ id="x1-5006"></a>
+<figcaption class="caption" ><span class="id">Figure 3:</span><span  
+class="content">Software dependencies of SciKit-SurgeryFRED. The registration algorithms and statistical measures of
+TRE are imported from SciKit-SurgeryCore and are shared with clinical applications built on SciKit-Surgery.
+The user interface is a Flask based web application, using Chart.js for plotting functionality.</span></figcaption><!--tex4ht:label?: x1-5005r2 -->
+</div>
+                                                                                             
+                                                                                             
+<!--l. 107--><p class="indent" >   </figure>
+<!--l. 109--><p class="indent" >   In common with the rest of SciKit-Surgery SciKit-SurgeryFRED utilises extensive testing and software process<span 
+class="cmbx-7">?</span> to
+ensure the application is robust, reusable, and sustainable.<span 
+class="cmbx-7">?</span> Change control and issue tracking is managed on
+GitHub<span class="footnote-mark"><a 
+href="surgeryfred-paper9.html#fn8x0"><sup class="textsuperscript">8</sup></a></span><a 
+ id="x1-5007f8"></a> 
+and continuous integration is managed using GitHub Actions.
+<span 
+class="cmbx-12">2.3</span>
+   <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
+ id="x1-60002.3"></a>Availability and Usage</h4>
+<!--l. 115--><p class="noindent" >For those who want to quickly try SciKit-SurgeryFRED, we currently maintain a running instance hosted at
+<a 
+href="https://scikit-surgeryfred.ew.r.appspot.com/" >https://scikit-surgeryfred.ew.r.appspot.com/</a>. This should be accessible from most modern web browsers.
+<!--l. 117--><p class="indent" >   If you want to run a locally hosted instance, or modify the code for your needs, you can download the
+source code. SciKit-SurgeryFRED is entirely open source software and is tested on Linux, MacOS, and
+Windows. The latest version can be obtained from Github. Alternatively, archived releases can be retrieved via
+Zenodo.<span 
+class="cmbx-7">?</span>
+   <!--l. 119-->
+   <div class="lstlisting" id="listing-1"><span class="label"><a 
+ id="x1-6001r1"></a><span 
+class="cmr-5">1</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">git</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">clone</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">https</span><span 
+class="cmtt-8">://</span><span 
+class="cmtt-8">github</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">com</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">UCL</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">scikit</span><span 
+class="cmtt-8">-</span><span 
+class="cmtt-8">surgeryfred</span>
+   
+   </div>
+<!--l. 123--><p class="indent" >   Once installed the dependencies can be installed on a local virtual machine using tox. The application can
+then be run with as follows. This should output a web address that you can open in a browser to run the
+software.
+   <!--l. 125-->
+   <div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x1-6002r1"></a><span 
+class="cmr-5">1</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">cd</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">scikit</span><span 
+class="cmtt-8">-</span><span 
+class="cmtt-8">surgeryfred</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-6003r2"></a><span 
+class="cmr-5">2</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">tox</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-6004r3"></a><span 
+class="cmr-5">3</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">source</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">tox</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">py37</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">bin</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">activate</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-6005r4"></a><span 
+class="cmr-5">4</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">python</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">main</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">py</span>
+   
+   </div>
+<!--l. 132--><p class="noindent" ><span 
+class="cmbx-12">2.4</span>
+   <h4 class="subsectionHead"><span class="titlemark">2.4   </span> <a 
+ id="x1-70002.4"></a>Extension to Anisotropic Errors</h4>
+<!--l. 134--><p class="noindent" >In many cases FLE cannot be properly modelled as an isotropic, independent, random variable. In the case of optical
+tracking systems for example<span 
+class="cmbx-7">?</span> the errors normal to the camera plane are approximately 3 times those parallel to the
+camera plane. It is straightforward to implement such an anisotropic FLE in SciKit-SurgeryFRED and test the eﬀect on
+registration outcomes. The following code snippet is taken from main.py. Line 66 deﬁnes the ratio of FLE in three
+directions. By default they are all equal.
+   <!--l. 137-->
+   <div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x1-7001r57"></a><span 
+class="cmr-5">57</span></span><span 
+class="cmtt-8">@app</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">route</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">getfle</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">methods</span><span 
+class="cmtt-8">=[</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">POST</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">])</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7002r58"></a><span 
+class="cmr-5">58</span></span><span 
+class="cmtt-8">def</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">getfle</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8">:</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7003r59"></a><span 
+class="cmr-5">59</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">&#x0022;&#x0022;&#x0022;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7004r60"></a><span 
+class="cmr-5">60</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">Returns</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">values</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">for</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fiducial</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">localisation</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">errors</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7005r61"></a><span 
+class="cmr-5">61</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">Values</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">are</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">randomly</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">selected</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">from</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">a</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">uniform</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7006r62"></a><span 
+class="cmr-5">62</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">distribution</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">from</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.5</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">to</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">5.0</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">pixels</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7007r63"></a><span 
+class="cmr-5">63</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">&#x0022;&#x0022;&#x0022;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7008r64"></a><span 
+class="cmr-5">64</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle_sd</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">random</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">uniform</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">low</span><span 
+class="cmtt-8">=0.5,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">high</span><span 
+class="cmtt-8">=5.0)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7009r65"></a><span 
+class="cmr-5">65</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">#</span><span 
+class="cmtt-8">change</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle_ratio</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">if</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">you</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">want</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">anisotropic</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7010r66"></a><span 
+class="cmr-5">66</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle_ratio</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">array</span><span 
+class="cmtt-8">([1.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">1.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">1.0],</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">dtype</span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">float64</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7011r67"></a><span 
+class="cmr-5">67</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">anis_scale</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">math</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">sqrt</span><span 
+class="cmtt-8">(3.0</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">linalg</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">norm</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">fle_ratio</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">**</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">2)</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7012r68"></a><span 
+class="cmr-5">68</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fixed_fle</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle_ratio</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle_sd</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">anis_scale</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7013r69"></a><span 
+class="cmr-5">69</span></span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7014r70"></a><span 
+class="cmr-5">70</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">moving_fle</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">array</span><span 
+class="cmtt-8">([0.,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.],</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">dtype</span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">float64</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7015r71"></a><span 
+class="cmr-5">71</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fixed_fle_eavs</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">expected_absolute_value</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">fixed_fle</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7016r72"></a><span 
+class="cmr-5">72</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">moving_fle_eavs</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">expected_absolute_value</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">moving_fle</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7017r73"></a><span 
+class="cmr-5">73</span></span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7018r74"></a><span 
+class="cmr-5">74</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">returnjson</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">jsonify</span><span 
+class="cmtt-8">({</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7019r75"></a><span 
+class="cmr-5">75</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">fixed_fle_sd</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">:</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fixed_fle</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">tolist</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7020r76"></a><span 
+class="cmr-5">76</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">moving_fle_sd</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">:</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">moving_fle</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">tolist</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7021r77"></a><span 
+class="cmr-5">77</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">fixed_fle_eav</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">:</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fixed_fle_eavs</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">tolist</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7022r78"></a><span 
+class="cmr-5">78</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">moving_fle_eav</span><span 
+class="cmtt-8">’</span><span 
+class="cmtt-8">:</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">moving_fle_eavs</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">tolist</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7023r79"></a><span 
+class="cmr-5">79</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">})</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-7024r80"></a><span 
+class="cmr-5">80</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">return</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">returnjson</span>
+   
+   </div>
+<!--l. 164--><p class="indent" >   Changing line 66 to; <!--l. 165-->
+   <div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x1-7025r66"></a><span 
+class="cmr-5">66</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fle_ratio</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">array</span><span 
+class="cmtt-8">([3.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">1.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">1.0],</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">dtype</span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8">np</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">float64</span><span 
+class="cmtt-8">)</span>
+   
+                                                                                             
+                                                                                             
+   </div>
+<!--l. 168--><p class="indent" >   sets the error in the x direction to 3 times that in the y and z directions.
+<!--l. 170--><p class="noindent" ><span 
+class="cmbx-12">2.5</span>
+   <h4 class="subsectionHead"><span class="titlemark">2.5   </span> <a 
+ id="x1-80002.5"></a>Addition of Systematic Errors</h4>
+<!--l. 172--><p class="noindent" >A second signiﬁcant source of error that is usually overlooked is the presence of systematic errors. For example when
+using a tracked pointer for ﬁducial localisation, any pointer calibration error will be be added to all ﬁducial
+markers. Similarly some optical tracking systems can introduce a systematic error on the tracking markers.<span 
+class="cmbx-7">?</span>
+SciKit-SurgeryFRED allows systematic error to be added to each ﬁducial. The ﬁducial localisation error is
+set within the JavaScript function init_ﬂes() (deﬁned in static/main.js) each time a new target is set.
+<!--l. 179-->
+   <div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x1-8001r496"></a><span 
+class="cmr-5">496</span></span><span 
+class="cmtt-8">/*</span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8002r497"></a><span 
+class="cmr-5">497</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">Sets</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">the</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">global</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fiducial</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">localisation</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">error</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">FLE</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8003r498"></a><span 
+class="cmr-5">498</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*/</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8004r499"></a><span 
+class="cmr-5">499</span></span><span 
+class="cmtt-8">function</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">init_fles</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">{</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8005r500"></a><span 
+class="cmr-5">500</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fetch</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">&#x0022;</span><span 
+class="cmtt-8">/</span><span 
+class="cmtt-8">getfle</span><span 
+class="cmtt-8">&#x0022;</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">{</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8006r501"></a><span 
+class="cmr-5">501</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">method</span><span 
+class="cmtt-8">:</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">&#x0022;</span><span 
+class="cmtt-8">POST</span><span 
+class="cmtt-8">&#x0022;</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8007r502"></a><span 
+class="cmr-5">502</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">})</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8008r503"></a><span 
+class="cmr-5">503</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">then</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">resp</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=&#x003E;</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">{</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8009r504"></a><span 
+class="cmr-5">504</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">if</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">resp</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">ok</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8010r505"></a><span 
+class="cmr-5">505</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">resp</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">json</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">then</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">data</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=&#x003E;</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">{</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8011r506"></a><span 
+class="cmr-5">506</span></span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8012r507"></a><span 
+class="cmr-5">507</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">preOpFLEStdDev</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">data</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">moving_fle_sd</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8013r508"></a><span 
+class="cmr-5">508</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpFLEStdDev</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">data</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">fixed_fle_sd</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8014r509"></a><span 
+class="cmr-5">509</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">preOpFLEEAV</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">data</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">moving_fle_eav</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8015r510"></a><span 
+class="cmr-5">510</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpFLEEAV</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">data</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">fixed_fle_eav</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8016r511"></a><span 
+class="cmr-5">511</span></span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8017r512"></a><span 
+class="cmr-5">512</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">preOpSysError</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">[0.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.0];</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8018r513"></a><span 
+class="cmr-5">513</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpSysError</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">[0.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.0,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.0];</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8019r514"></a><span 
+class="cmr-5">514</span></span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8020r515"></a><span 
+class="cmr-5">515</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">FLE</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">{</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">preOpFLEStdDev</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpFLEStdDev</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8021r516"></a><span 
+class="cmr-5">516</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">preOpFLEEAV</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpFLEEAV</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8022r517"></a><span 
+class="cmr-5">517</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">preOpSysError</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpSysError</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">};</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8023r518"></a><span 
+class="cmr-5">518</span></span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8024r519"></a><span 
+class="cmr-5">519</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">expectedFLEText</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">innerHTML</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">Math</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">round</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">Math</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">sqrt</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">FLE</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">intraOpFLEEAV</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8">*100)</span><span 
+class="cmtt-8">/100;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8025r520"></a><span 
+class="cmr-5">520</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">})</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8026r521"></a><span 
+class="cmr-5">521</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">})</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8027r522"></a><span 
+class="cmr-5">522</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">catch</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">err</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=&#x003E;</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">{</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8028r523"></a><span 
+class="cmr-5">523</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">console</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">log</span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">&#x0022;</span><span 
+class="cmtt-8">An</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">error</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">occured</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">setting</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">fles</span><span 
+class="cmtt-8">&#x0022;</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">err</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">message</span><span 
+class="cmtt-8">)</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8029r524"></a><span 
+class="cmr-5">524</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">})</span><span 
+class="cmtt-8">;</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8030r525"></a><span 
+class="cmr-5">525</span></span><span 
+class="cmtt-8">}</span>
+   
+   </div>
+<!--l. 211--><p class="indent" >   By default there is no systematic error, (lines 512 and 513). We can add a systematic interoperative error at line 513
+as;
+   <!--l. 214-->
+   <div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x1-8031r513"></a><span 
+class="cmr-5">513</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">let</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">intraOpSysError</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">=</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">[1.0</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">Math</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">random</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">-</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.5)</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8032r514"></a><span 
+class="cmr-5">514</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">1.0</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">Math</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">random</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">-</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.5)</span><span 
+class="cmtt-8">,</span><span 
+class="cmtt-8"> </span><br /><span class="label"><a 
+ id="x1-8033r515"></a><span 
+class="cmr-5">515</span></span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">1.0</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">*</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">(</span><span 
+class="cmtt-8">Math</span><span 
+class="cmtt-8">.</span><span 
+class="cmtt-8">random</span><span 
+class="cmtt-8">()</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">-</span><span 
+class="cmtt-8"> </span><span 
+class="cmtt-8">0.5)</span><span 
+class="cmtt-8">];</span>
+   
+   </div>
+<!--l. 220--><p class="indent" >   In this case the error is an isotropic uniform random variable, in the range -0.5 to 0.5. This error will be applied to all
+ﬁducial markers for a given registration.
+<!--l. 1--><p class="noindent" ><span 
+class="cmbx-12">3.</span>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-90003"></a>Results</h3>
+<!--l. 3--><p class="noindent" ><span 
+class="cmbx-12">3.1</span>
+   <h4 class="subsectionHead"><span class="titlemark">3.1   </span> <a 
+ id="x1-100003.1"></a>SciKit-SurgeryFRED as a Teaching Aid</h4>
+<!--l. 5--><p class="noindent" >SciKit-SurgeryFRED (v0.0.3)<span 
+class="cmbx-7">?</span> was used at our Medical Summer School in 2020 with a cohort of 5 students. Informal
+feedback indicated that it had improved their understanding of ﬁducial based registration. SciKit-SurgeryFRED also
+forms part of the basic augmented reality demonstration (BARD) which was a ﬁnalist at the MICCAI 2020 educational
+challenge <span class="footnote-mark"><a 
+href="surgeryfred-paper10.html#fn9x0"><sup class="textsuperscript">9</sup></a></span><a 
+ id="x1-10001f9"></a> .
+                                                                                             
+                                                                                             
+<span 
+class="cmbx-12">3.2</span>
+   <h4 class="subsectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x1-110003.2"></a>Extension to Anisotropic Errors</h4>
+<!--l. 12--><p class="noindent" >We simulated an anisotropic independent FLE, with FLE in the x direction being 3 times that in the y and z, as
+described in Section <a 
+href="#x1-70002.4">2.4<!--tex4ht:ref: sec:anis_method --></a>. Errors were scaled so that the expected absolute value of the FLE was the same as for the
+isotropic case. SciKit-SurgeryFRED was then used to perform at least 200 simulated registrations, the results of which
+are shown in Fig. <a 
+href="#x1-11001r4">4<!--tex4ht:ref: fig:anis_error --></a>.
+<!--l. 19--><p class="indent" >   <figure class="figure"> 
+
+                                                                                             
+                                                                                             
+<a 
+ id="x1-11001r4"></a>
+                                                                                             
+                                                                                             
+<div class="center" 
+>
+<!--l. 20--><p class="noindent" >
+<!--l. 21--><p class="noindent" ><img 
+src="images/anisitropic_error.png" alt="PIC"  
+width="439" height="250" >
+<a 
+ id="x1-11002"></a>
+<figcaption class="caption" ><span class="id">Figure 4:</span><span  
+class="content">Results of 213 registrations using an anisotropic model of FLE</span></figcaption><!--tex4ht:label?: x1-11001r3 -->
+</div>
+                                                                                             
+                                                                                             
+<!--l. 24--><p class="indent" >   </figure>
+<!--l. 26--><p class="indent" >   It was apparent when performing the registrations that the majority of target registration error was in the
+x direction. However this is not communicated in the statistics of Figure <a 
+href="#x1-11001r4">4<!--tex4ht:ref: fig:anis_error --></a>. It would be an interesting
+extension exercise to use SciKit-SurgeryFRED to explore ways of communicating anisotropic errors during
+treatment.
+<span 
+class="cmbx-12">3.3</span>
+   <h4 class="subsectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x1-120003.3"></a>Addition of Systematic Errors</h4>
+<!--l. 33--><p class="noindent" >We added a systematic FLE as an isotropic uniform random variable, in the range -0.5 to 0.5, as described in
+Section <a 
+href="#x1-80002.5">2.5<!--tex4ht:ref: sec:sys_method --></a>. This error will be applied to all ﬁducial markers for a given registration. We performed at
+least 200 simulated registrations using SciKit-SurgeryFRED, the results of which are shown in Fig. <a 
+href="#x1-12001r5">5<!--tex4ht:ref: fig:sys_error --></a>.
+<figure class="figure"> 
+
+                                                                                             
+                                                                                             
+<a 
+ id="x1-12001r5"></a>
+                                                                                             
+                                                                                             
+<div class="center" 
+>
+<!--l. 37--><p class="noindent" >
+<!--l. 38--><p class="noindent" ><img 
+src="images/systematic_error.png" alt="PIC"  
+width="439" height="259" >
+<a 
+ id="x1-12002"></a>
+<figcaption class="caption" ><span class="id">Figure 5:</span><span  
+class="content">Results of 201 registrations with systematic error.</span></figcaption><!--tex4ht:label?: x1-12001r3 -->
+</div>
+                                                                                             
+                                                                                             
+<!--l. 41--><p class="indent" >   </figure>
+<!--l. 43--><p class="indent" >   It is noticeable that average TREs are higher than in cases where there is no systematic error, while FRE remains
+similar. This is as expected as FRE will not account for systematic errors. This is a useful demonstration of this eﬀect,
+though it might be more instructive to implement systematic errors in the game based method, see Section <a 
+href="#x1-40002.1">2.1<!--tex4ht:ref: sec:game_method --></a>, to
+investigate the likely clinical impact of these systematic errors.
+<span 
+class="cmbx-12">3.4</span>
+   <h4 class="subsectionHead"><span class="titlemark">3.4   </span> <a 
+ id="x1-130003.4"></a>Statistical Signiﬁcance</h4>
+<!--l. 51--><p class="noindent" >As discussed in Section <a 
+href="#x1-30002">2<!--tex4ht:ref: sec:methods --></a> it is useful to perform tests of statistical signiﬁcance on SciKit-SurgeryFRED’s registration
+results. We used the function <a 
+href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html" >stats.linregress</a> from SciPy<span 
+class="cmbx-7">?</span> to perform a Wald Test against the null hypothesis that the
+slope is zero. For the results shown in Figures <a 
+href="#x1-3004r2">2<!--tex4ht:ref: fig:correlation --></a>, <a 
+href="#x1-11001r4">4<!--tex4ht:ref: fig:anis_error --></a>, and <a 
+href="#x1-12001r5">5<!--tex4ht:ref: fig:sys_error --></a> there was no signiﬁcant relationship between actual TRE and
+either actual or expected FRE. There was a signiﬁcant relationship between actual TRE and the expected TRE. All of
+these results are as expected.
+<!--l. 61--><p class="indent" >   Tests against the expected value of FLE and the number of ﬁducial markers are more problematic, as they are not
+continuous variables, which should be apparent when looking at the results charts. The reason for this is obvious for
+the number of ﬁducial markers. The expected value of FLE is clustered into groups as this is only set
+once for a given target, however the registration for this target will be repeated each time a new ﬁducial
+marker is added beyond the minimum of 3. Hence if the user adds a total of 10 ﬁducial markers, this
+will create 8 registration results all with diﬀerent TRE and FRE, but with a single value of expected
+FLE.
+<!--l. 72--><p class="noindent" ><span 
+class="cmbx-12">3.5</span>
+   <h4 class="subsectionHead"><span class="titlemark">3.5   </span> <a 
+ id="x1-140003.5"></a>SciKit-SurgeryFRED for Research</h4>
+<!--l. 73--><p class="noindent" >The results of the game based study described in Section <a 
+href="#x1-40002.1">2.1<!--tex4ht:ref: sec:game_method --></a> are shown in Figure <a 
+href="#x1-14001r6">6<!--tex4ht:ref: fig:usability --></a>. As expected scores are highest when
+the actual TRE is known. Interestingly it appears that when told only the expected value of the FLE the students
+tended to under treat the target more, resulting in lower overall scores.
+<!--l. 80--><p class="indent" >   <figure class="figure"> 
+
+                                                                                             
+                                                                                             
+<a 
+ id="x1-14001r6"></a>
+                                                                                             
+                                                                                             
+<div class="center" 
+>
+<!--l. 81--><p class="noindent" >
+<!--l. 82--><p class="noindent" ><img 
+src="usability.png" alt="PIC"  
+width="243" height="156" >
+<a 
+ id="x1-14002"></a>
+<figcaption class="caption" ><span class="id">Figure 6:</span><span  
+class="content">Average scores and treatment failure rates for the game based study.</span></figcaption><!--tex4ht:label?: x1-14001r3 -->
+</div>
+                                                                                             
+                                                                                             
+<!--l. 85--><p class="indent" >   </figure>
+<!--l. 87--><p class="indent" >   The statistical signiﬁcance of the results was tested using a two sided, unpaired, T-test implemented in SciPy’s<span 
+class="cmbx-7">?</span>
+<a 
+href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html" >stats.ttest_ind</a> function. Using a p-value of 0.05 none of the results were statistically signiﬁcant. Currently there are only
+100 data points (20 for each category), so this is not surprising.
+<span 
+class="cmbx-12">4.</span>
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-150004"></a>Discussion</h3>
+<!--l. 2--><p class="noindent" >SciKit-SurgeryFRED has proven useful for the teaching of ﬁducial based registration, though more work on usability and
+measurement of teaching outcomes would be helpful. The results of the simulated ablation study are also of interest,
+however more participants are needed before any ﬁrm conclusions can be drawn. If we assume that additional data follow
+the same pattern as observed to date we would need to run the game on a further 15 subjects to show statistical
+signiﬁcance on the diﬀerence in scores when using actual TRE. In the case of the FLE we would need a further 30
+participants. Given the ease with which SciKit-SurgeryFRED can be deployed and used we hope to achieve this in the
+near future.
+<!--l. 13--><p class="indent" >   Currently SciKit-SurgeryFRED implements numerical measures for registration errors, however in practice it may be
+better to use graphical representations of registration error. An example is the use of outline rendering to show the
+misalignment of anatomical edges during keyhole surgery.<span 
+class="cmbx-7">?</span> Azimi et al.<span 
+class="cmbx-7">?</span> provide a similar example of a neuro-surgical
+guidance system where the registration error is communicated to the surgeon via misalignment of external anatomy.
+Such a method could be relatively easily implemented in SciKit-SurgeryFRED, with gamiﬁcation used to measure its
+eﬀectiveness.
+<!--l. 23--><p class="indent" >   Currently SciKit-SurgeryFRED is limited to rigid registration using point correspondence, however, there is no
+architectural reason why it could not be used to examine the eﬀects of registration uncertainty more generally. It may be
+useful to implement more general error prediction models for rigid registrations.<span 
+class="cmbx-7">?</span><span 
+class="cmr-7">,</span><span 
+class="cmbx-7">?</span>
+<!--l. 28--><p class="indent" >   Surface based registration has long been proposed as a way to improve registration accuracy for neurosurgery<span 
+class="cmbx-7">?</span> and is
+is now integrated into commercial systems with mixed results.<span 
+class="cmbx-7">?</span> SciKit-SurgeryFRED could be extended to include
+diﬀerent registration methods, though obviously would require a more inclusive name. As we move to non rigid
+and probabilistic registrations, the correct interpretation of registration uncertainty will become more
+challenging.<span 
+class="cmbx-7">?</span>
+<!--l. 37--><p class="noindent" ><span 
+class="cmbx-12">5.</span>
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-160005"></a>Conclusion</h3>
+<!--l. 38--><p class="noindent" >Understanding registration uncertainty is essential for the correct use of image guided surgery. There is, however, a lack
+of tools to aid teaching and research. We have presented SciKit-SurgeryFRED and demonstrated its use for teaching and
+research. SciKit-SurgeryFRED’s ease of use enables it be deployed and demonstrated rapidly. SciKit-SurgeryFRED is
+open source and readily available so researchers and educators can modify and apply SciKit-SurgeryFRED based on
+their speciﬁc requirements.
+<!--l. 1--><p class="noindent" ><span 
+class="cmbx-12">6.</span>
+   <h3 class="sectionHead"><span class="titlemark">6   </span> <a 
+ id="x1-170006"></a>Open Access and Open Data</h3>
+<!--l. 2--><p class="noindent" >This research was funded in whole, or in part, by the Wellcome Trust [203145Z/16/Z]. For the purpose of Open Access,
+the author has applied a CC BY public copyright licence to any Author Accepted Manuscript version
+arising from this submission. The registration data described in Sections <a 
+href="#x1-30002">2<!--tex4ht:ref: sec:methods --></a> and <a 
+href="#x1-90003">3<!--tex4ht:ref: sec:results --></a> can be downloaded from
+<a 
+href="https://doi.org/10.5281/zenodo.4434278" >https://doi.org/10.5281/zenodo.4434278</a>.
+                                                                                             
+                                                                                             
+<!--l. 7--><p class="noindent" ><span 
+class="cmbx-12">7.</span>
+   <h3 class="sectionHead"><span class="titlemark">7   </span> <a 
+ id="x1-180007"></a>Acknowledgements</h3>
+<!--l. 8--><p class="noindent" >This work is supported by the Wellcome/EPSRC Centre for Interventional and Surgical Sciences (WEISS)
+[203145Z/16/Z]. Our thanks to Simone Foti for designing the SciKit-Surgery logo, and to Dr Mary Thompson for proof
+reading the manuscript.
+    
+</body> 
+</html>
+                                                                                             
+
+

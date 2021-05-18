@@ -50,6 +50,9 @@ build/surgeryfred-paper.html : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FI
 %.pdf : %.dvi
 	dvipdf $<
 
+dependency_graph.png : dependency_graph.dot
+	dot -Tpng dependency_graph.dot -o dependency_graph.png
+
 %.png : %.eps 
 	gs -dSAFER -dEPSCrop -r600 -sDEVICE=pngalpha -o $@ $<
 

@@ -34,7 +34,7 @@ surgeryfred-paper.dvi : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FIGURES)
 	latex -halt-on-error surgeryfred-paper
 	latex -halt-on-error surgeryfred-paper
 
-build/surgeryfred-paper.html : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FIGURES_PNG)
+build/surgeryfred-paper.html : surgeryfred-paper.tex $(EXTERNALS) $(INPUTS) $(FIGURES_PNG) $(FIGURES)
 	latex -halt-on-error surgeryfred-paper.tex
 	bibtex surgeryfred-paper
 	htlatex surgeryfred-paper.tex "html,html5, charset=utf-8" " -cunihtf -utf8" 
